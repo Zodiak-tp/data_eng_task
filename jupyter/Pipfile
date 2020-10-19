@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+mypy = "*"
+sqlalchemy-stubs = "*"
+pytest = "*"
+
+[packages]
+pyyaml = "*"
+jupyter_contrib_nbextensions = "*"
+jupyter_nbextensions_configurator = "*"
+sqlalchemy = "*"
+sqlstate = {editable = true,git = "https://github.com/gastromatic/sqlstate",ref = "0.0.5"}
+psycopg2 = "*"
+
+
+[requires]
+python_version = "3.7"

@@ -1,0 +1,26 @@
+version: '3'
+services:
+  database:
+    build:
+      dockerfile: Dockerfile
+      context: test_db
+    ports:
+      - "5430:5432"
+    volumes:
+      - engineering-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+  jupyter:
+    build:
+      context: ./
+      dockerfile: jupyter/Dockerfile
+    restart: on-failure
+    # host network is needed to find the engineering-data database
+    # (assumed it has been port-forwarded to 5430)
+    # jupyter notebook server launches on http://localhost:3000
+    network_mode: host
+    volumes:
+      - ./src/notebooks:/home/jovyan/notebooks
+      - ./src/data_engineering:/home/jovyan/data_engineering
+volumes:
+  engineering-data:
